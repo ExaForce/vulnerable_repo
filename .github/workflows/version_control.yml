@@ -30,7 +30,7 @@ jobs:
           })
 
   build:
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/version') && (github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/version')
     runs-on: ubuntu-latest
 
     steps:
