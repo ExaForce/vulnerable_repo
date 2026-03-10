@@ -1,6 +1,19 @@
-- name: Get changed files
-  env:
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  run: |
-    FILES=$(gh pr diff ${{ github.event.pull_request.number }} --name-only)
-    echo "$FILES"
+name: Version Control
+
+on:
+  pull_request_target:
+    branches: main
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  detect:
+    name: Detect PR type
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get changed files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FILES=$(gh pr diff ${{ github.event.pull_request.number }} --name-only)
+          echo "$FILES"
